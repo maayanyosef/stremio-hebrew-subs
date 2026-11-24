@@ -3,6 +3,8 @@
 Serves my own subtitle files (Hebrew, or any language) to Stremio for any movie or series episode,
 keyed by IMDb id. Static files are built by a GitHub Action and hosted on GitHub Pages.
 
+Install URL: `https://maayan-hebrew-subs.mayan012.workers.dev/manifest.json`. Full source, setup and Worker docs live in a private repo (maayanyosef/stremio-hebrew-subs-private).
+
 ## Add a subtitle
 
 1. Drop the `.srt` (UTF-8) into `subs/` using this layout:
