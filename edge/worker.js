@@ -17,7 +17,7 @@ const json = (body, maxAge = 300) =>
 export default {
   async fetch(request) {
     if (request.method === "OPTIONS") return new Response(null, { headers: CORS });
-    const path = decodeURIComponent(new URL(request.url).pathname);
+    const path = new URL(request.url).pathname; // keep raw: extra args may contain %2F
     if (path === "/" || path === "/manifest.json") {
       const r = await fetch(`${PAGES}/manifest.json`, { cf: { cacheTtl: 300 } });
       return json(await r.json());
@@ -27,7 +27,7 @@ export default {
     if (m) {
       const r = await fetch(`${PAGES}/index.json`, { cf: { cacheTtl: 300 } });
       const index = r.ok ? await r.json() : {};
-      const entry = index[m[2]];
+      const entry = index[decodeURIComponent(m[2])];
       return json({ subtitles: entry && entry.type === m[1] ? entry.subtitles : [] });
     }
     return new Response("Not found", { status: 404, headers: CORS });
